@@ -781,7 +781,7 @@ Message: ${formData.message || 'Aucun message'}`;
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {/* Contact Form */}
               <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none"></div>
                 <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 border-2 border-gray-200 rounded-3xl">
                   <CardContent className="pt-8 pb-8">
                   <form onSubmit={handleSubmit} className="space-y-5">
