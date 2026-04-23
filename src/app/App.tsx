@@ -857,29 +857,29 @@ Message: ${formData.message}`;
                   className="h-12"
                 />
 
-                {/* DROPDOWN FIX 100% SAFE */}
-                <Select
-                  value={formData.typeEntreprise || ""}
-                  onValueChange={(value) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      typeEntreprise: value,
-                    }))
-                  }
-                >
-                  <SelectTrigger className="h-12">
-                    <SelectValue placeholder="Type d'entreprise" />
-                  </SelectTrigger>
+                {/* DROPDOWN CLEAN */}
+<Select
+  value={formData.typeEntreprise || ""}
+  onValueChange={(value) =>
+    setFormData((prev) => ({
+      ...prev,
+      typeEntreprise: value,
+    }))
+  }
+>
+  <SelectTrigger className="h-12">
+    <SelectValue placeholder="Type d'entreprise" />
+  </SelectTrigger>
 
-                  <SelectContent>
-                    <SelectItem value="artisan">Artisan</SelectItem>
-                    <SelectItem value="restaurant">Restaurant</SelectItem>
-                    <SelectItem value="garage">Garage</SelectItem>
-                    <SelectItem value="taxi">Taxi / VTC</SelectItem>
-                    <SelectItem value="commerce">Commerce local</SelectItem>
-                    <SelectItem value="autre">Autre</SelectItem>
-                  </SelectContent>
-                </Select>
+  <SelectContent position="popper">
+    <SelectItem value="artisan">Artisan</SelectItem>
+    <SelectItem value="restaurant">Restaurant</SelectItem>
+    <SelectItem value="garage">Garage</SelectItem>
+    <SelectItem value="taxi">Taxi / VTC</SelectItem>
+    <SelectItem value="commerce">Commerce local</SelectItem>
+    <SelectItem value="autre">Autre</SelectItem>
+  </SelectContent>
+</Select>
 
                 {/* MESSAGE */}
                 <Textarea
