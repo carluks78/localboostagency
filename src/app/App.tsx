@@ -859,7 +859,7 @@ Message: ${formData.message}`;
 
                 {/* DROPDOWN CLEAN */}
 <Select
-  value={formData.typeEntreprise || ""}
+  value={formData.typeEntreprise ?? undefined}
   onValueChange={(value) =>
     setFormData((prev) => ({
       ...prev,
