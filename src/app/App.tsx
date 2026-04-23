@@ -781,96 +781,111 @@ Message: ${formData.message || 'Aucun message'}`;
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {/* Contact Form */}
               <div className="relative group">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none"></div>
-                <Card className="shadow-2xl hover:shadow-3xl transition-all duration-500 border-2 border-gray-200 rounded-3xl">
-                  <CardContent className="pt-8 pb-8">
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div>
-                      <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-2">
-                        Votre nom *
-                      </label>
-                      <Input
-                        id="nom"
-                        name="nom"
-                        type="text"
-                        required
-                        value={formData.nom}
-                        onChange={handleChange}
-                        placeholder="Jean Dupont"
-                        className="h-12"
-                      />
-                    </div>
+  
+  {/* Overlay décoratif (NE BLOQUE PAS LES CLICS) */}
+  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none" />
 
-                    <div>
-                      <label htmlFor="telephone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Téléphone *
-                      </label>
-                      <Input
-                        id="telephone"
-                        name="telephone"
-                        type="tel"
-                        required
-                        value={formData.telephone}
-                        onChange={handleChange}
-                        placeholder="06 12 34 56 78"
-                        className="h-12"
-                      />
-                    </div>
+  {/* Card */}
+  <Card className="relative z-10 shadow-2xl hover:shadow-3xl transition-all duration-500 border-2 border-gray-200 rounded-3xl">
+    
+    <CardContent className="pt-8 pb-8">
+      
+      <form onSubmit={handleSubmit} className="space-y-5">
+        
+        {/* Nom */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Votre nom *
+          </label>
+          <Input
+            name="nom"
+            value={formData.nom}
+            onChange={handleChange}
+            required
+            placeholder="Jean Dupont"
+            className="h-12"
+          />
+        </div>
 
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="contact@example.com"
-                        className="h-12"
-                      />
-                    </div>
+        {/* Téléphone */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Téléphone *
+          </label>
+          <Input
+            name="telephone"
+            type="tel"
+            value={formData.telephone}
+            onChange={handleChange}
+            required
+            placeholder="06 12 34 56 78"
+            className="h-12"
+          />
+        </div>
 
-                    <div>
-                      <label htmlFor="typeEntreprise" className="block text-sm font-medium text-gray-700 mb-2">
-                        Type d'entreprise
-                      </label>
-                      <Select
-                        value={formData.typeEntreprise}
-                        onValueChange={(value) => setFormData({ ...formData, typeEntreprise: value })}
-                      >
-                        <SelectTrigger className="h-12">
-                          <SelectValue placeholder="Sélectionnez votre secteur" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="artisan">Artisan</SelectItem>
-                          <SelectItem value="restaurant">Restaurant / Traiteur</SelectItem>
-                          <SelectItem value="garage">Garage / Mécanique</SelectItem>
-                          <SelectItem value="taxi">Taxi / VTC</SelectItem>
-                          <SelectItem value="commerce">Commerce local</SelectItem>
-                          <SelectItem value="autre">Autre</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Email
+          </label>
+          <Input
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="contact@example.com"
+            className="h-12"
+          />
+        </div>
 
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                        Votre message (optionnel)
-                      </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Décrivez brièvement votre situation..."
-                      />
-                    </div>
+        {/* Type entreprise */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Type d'entreprise
+          </label>
 
-                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-lg py-7 shadow-xl hover:shadow-2xl transition-all font-semibold">
-                      Demander un audit gratuit
-                    </Button>
+          <Select
+            value={formData.typeEntreprise}
+            onValueChange={(value) =>
+              setFormData({ ...formData, typeEntreprise: value })
+            }
+          >
+            <SelectTrigger className="h-12">
+              <SelectValue placeholder="Sélectionnez votre secteur" />
+            </SelectTrigger>
+
+            <SelectContent>
+              <SelectItem value="artisan">Artisan</SelectItem>
+              <SelectItem value="restaurant">Restaurant</SelectItem>
+              <SelectItem value="garage">Garage</SelectItem>
+              <SelectItem value="taxi">Taxi / VTC</SelectItem>
+              <SelectItem value="commerce">Commerce local</SelectItem>
+              <SelectItem value="autre">Autre</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Message */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Message (optionnel)
+          </label>
+          <Textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={4}
+            placeholder="Décrivez votre besoin..."
+          />
+        </div>
+
+        {/* Button */}
+        <Button
+          type="submit"
+          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg py-7 font-semibold shadow-xl hover:shadow-2xl transition-all"
+        >
+          Demander un audit gratuit
+        </Button>
 
                     <p className="text-sm text-gray-500 text-center leading-relaxed">
                       Nos solutions sont adaptées à votre activité et à votre zone géographique. Nous travaillons uniquement avec les entreprises que nous pouvons aider à obtenir des résultats.
