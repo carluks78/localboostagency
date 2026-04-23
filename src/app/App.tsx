@@ -760,208 +760,220 @@ Message: ${formData.message || 'Aucun message'}`;
       </section>
 
       {/* Contact Form Section */}
-      <section id="contact" className="py-24 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full opacity-10 blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full opacity-10 blur-3xl"></div>
+<section
+  id="contact"
+  className="py-24 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden"
+>
+  {/* Background decorations (safe, no blocking clicks) */}
+  <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full opacity-10 blur-3xl pointer-events-none" />
+  <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full opacity-10 blur-3xl pointer-events-none" />
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-                Passez à l'action
-              </h2>
-              <p className="text-2xl md:text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold mb-4">
-                Commencez à recevoir plus de clients dès maintenant
-              </p>
-              <p className="text-lg md:text-xl text-gray-600">
-                Remplissez le formulaire et recevez votre audit gratuit sous 24h.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              {/* Contact Form */}
-              <div className="relative group">
-  
-  {/* Overlay décoratif (NE BLOQUE PAS LES CLICS) */}
-  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none" />
-
-  {/* Card */}
-  <Card className="relative z-10 shadow-2xl hover:shadow-3xl transition-all duration-500 border-2 border-gray-200 rounded-3xl">
-    
-    <CardContent className="pt-8 pb-8">
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="max-w-5xl mx-auto">
       
-      <form onSubmit={handleSubmit} className="space-y-5">
-        
-        {/* Nom */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Votre nom *
-          </label>
-          <Input
-            name="nom"
-            value={formData.nom}
-            onChange={handleChange}
-            required
-            placeholder="Jean Dupont"
-            className="h-12"
-          />
+      {/* Title */}
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+          Passez à l'action
+        </h2>
+
+        <p className="text-2xl md:text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold mb-4">
+          Commencez à recevoir plus de clients dès maintenant
+        </p>
+
+        <p className="text-lg md:text-xl text-gray-600">
+          Remplissez le formulaire et recevez votre audit gratuit sous 24h.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        {/* FORM */}
+        <div className="relative group">
+
+          {/* IMPORTANT: overlay NON bloquant */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none" />
+
+          <Card className="relative z-10 shadow-2xl border-2 border-gray-200 rounded-3xl">
+            <CardContent className="pt-8 pb-8">
+
+              <form
+                className="space-y-5"
+                onSubmit={(e) => {
+                  e.preventDefault();
+
+                  const msg = `Demande audit LocalBoost
+
+Nom: ${formData.nom}
+Téléphone: ${formData.telephone}
+Email: ${formData.email}
+Type: ${formData.typeEntreprise}
+Message: ${formData.message}`;
+
+                  const isMobile =
+                    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+                  if (isMobile) {
+                    window.location.href =
+                      `sms:+33659841301?body=${encodeURIComponent(msg)}`;
+                  } else {
+                    window.open(
+                      `mailto:localboostagency.contact@gmail.com?subject=${encodeURIComponent(
+                        "Demande d'audit gratuit"
+                      )}&body=${encodeURIComponent(msg)}`
+                    );
+                  }
+                }}
+              >
+
+                {/* NOM */}
+                <Input
+                  name="nom"
+                  value={formData.nom}
+                  onChange={handleChange}
+                  placeholder="Votre nom"
+                  required
+                  className="h-12"
+                />
+
+                {/* TELEPHONE */}
+                <Input
+                  name="telephone"
+                  value={formData.telephone}
+                  onChange={handleChange}
+                  placeholder="Téléphone"
+                  required
+                  type="tel"
+                  className="h-12"
+                />
+
+                {/* EMAIL */}
+                <Input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                  type="email"
+                  className="h-12"
+                />
+
+                {/* DROPDOWN FIX 100% SAFE */}
+                <Select
+                  value={formData.typeEntreprise || ""}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      typeEntreprise: value,
+                    }))
+                  }
+                >
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Type d'entreprise" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value="artisan">Artisan</SelectItem>
+                    <SelectItem value="restaurant">Restaurant</SelectItem>
+                    <SelectItem value="garage">Garage</SelectItem>
+                    <SelectItem value="taxi">Taxi / VTC</SelectItem>
+                    <SelectItem value="commerce">Commerce local</SelectItem>
+                    <SelectItem value="autre">Autre</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                {/* MESSAGE */}
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Message (optionnel)"
+                  rows={4}
+                />
+
+                {/* BUTTON */}
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg py-7 font-semibold shadow-xl"
+                >
+                  Demander un audit gratuit
+                </Button>
+
+                <p className="text-xs text-gray-500 text-center">
+                  Réponse sous 24h · Sans engagement
+                </p>
+
+              </form>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Téléphone */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Téléphone *
-          </label>
-          <Input
-            name="telephone"
-            type="tel"
-            value={formData.telephone}
-            onChange={handleChange}
-            required
-            placeholder="06 12 34 56 78"
-            className="h-12"
-          />
-        </div>
+        {/* CONTACT DIRECT */}
+        <div className="space-y-6">
 
-        {/* Email */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Email
-          </label>
-          <Input
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="contact@example.com"
-            className="h-12"
-          />
-        </div>
-
-        {/* Type entreprise */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Type d'entreprise
-          </label>
-
-          <Select
-            value={formData.typeEntreprise}
-            onValueChange={(value) =>
-              setFormData({ ...formData, typeEntreprise: value })
-            }
-          >
-            <SelectTrigger className="h-12">
-              <SelectValue placeholder="Sélectionnez votre secteur" />
-            </SelectTrigger>
-
-            <SelectContent>
-              <SelectItem value="artisan">Artisan</SelectItem>
-              <SelectItem value="restaurant">Restaurant</SelectItem>
-              <SelectItem value="garage">Garage</SelectItem>
-              <SelectItem value="taxi">Taxi / VTC</SelectItem>
-              <SelectItem value="commerce">Commerce local</SelectItem>
-              <SelectItem value="autre">Autre</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Message */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Message (optionnel)
-          </label>
-          <Textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={4}
-            placeholder="Décrivez votre besoin..."
-          />
-        </div>
-
-        {/* Button */}
-        <Button
-          type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg py-7 font-semibold shadow-xl hover:shadow-2xl transition-all"
-        >
-          Demander un audit gratuit
-        </Button>
-
-                    <p className="text-sm text-gray-500 text-center leading-relaxed">
-                      Nos solutions sont adaptées à votre activité et à votre zone géographique. Nous travaillons uniquement avec les entreprises que nous pouvons aider à obtenir des résultats.
-                    </p>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-              {/* Direct Contact */}
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-3xl font-bold mb-8 text-gray-900">Contactez-nous directement</h3>
-                </div>
-
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  <Card className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-blue-100 hover:border-blue-300 rounded-2xl">
-                    <CardContent className="pt-6 pb-6">
-                      <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 transform group-hover:scale-110 transition-transform shadow-lg">
-                          <Phone className="w-8 h-8 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold mb-2 text-gray-700 text-sm uppercase tracking-wide">Téléphone</h4>
-                          <a href="tel:0659841301" className="text-blue-600 hover:text-blue-700 text-xl font-bold">
-                            06 59 84 13 01
-                          </a>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  <Card className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-green-100 hover:border-green-300 rounded-2xl">
-                    <CardContent className="pt-6 pb-6">
-                      <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center flex-shrink-0 transform group-hover:scale-110 transition-transform shadow-lg">
-                          <MessageCircle className="w-8 h-8 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold mb-2 text-gray-700 text-sm uppercase tracking-wide">WhatsApp</h4>
-                          <a href="https://wa.me/33659841301" className="text-green-600 hover:text-green-700 text-xl font-bold">
-                            Écrivez-nous
-                          </a>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  <Card className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-purple-100 hover:border-purple-300 rounded-2xl">
-                    <CardContent className="pt-6 pb-6">
-                      <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 transform group-hover:scale-110 transition-transform shadow-lg">
-                          <Mail className="w-8 h-8 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold mb-2 text-gray-700 text-sm uppercase tracking-wide">Email</h4>
-                          <a href="mailto:localboostagency.contact@gmail.com" className="text-purple-600 hover:text-purple-700 text-sm font-bold break-all">
-                            localboostagency.contact@gmail.com
-                          </a>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+          {/* PHONE */}
+          <Card className="border-2 border-blue-100 rounded-2xl hover:shadow-lg transition">
+            <CardContent className="flex items-center gap-5 p-6">
+              <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
+                <Phone className="text-white w-6 h-6" />
               </div>
-            </div>
-          </div>
+
+              <div>
+                <p className="text-sm font-bold text-gray-600">Téléphone</p>
+                <a
+                  href="tel:+33659841301"
+                  className="text-blue-600 font-bold text-lg"
+                >
+                  06 59 84 13 01
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* WHATSAPP */}
+          <Card className="border-2 border-green-100 rounded-2xl hover:shadow-lg transition">
+            <CardContent className="flex items-center gap-5 p-6">
+              <div className="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center">
+                <MessageCircle className="text-white w-6 h-6" />
+              </div>
+
+              <div>
+                <p className="text-sm font-bold text-gray-600">WhatsApp</p>
+                <a
+                  href="https://wa.me/33659841301"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-600 font-bold text-lg"
+                >
+                  Ouvrir la discussion
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* EMAIL */}
+          <Card className="border-2 border-purple-100 rounded-2xl hover:shadow-lg transition">
+            <CardContent className="flex items-center gap-5 p-6">
+              <div className="w-14 h-14 bg-purple-600 rounded-xl flex items-center justify-center">
+                <Mail className="text-white w-6 h-6" />
+              </div>
+
+              <div>
+                <p className="text-sm font-bold text-gray-600">Email</p>
+                <a
+                  href="mailto:localboostagency.contact@gmail.com"
+                  className="text-purple-600 font-bold text-sm break-all"
+                >
+                  localboostagency.contact@gmail.com
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="bg-gradient-to-br from-gray-900 via-gray-900 to-blue-900 text-white py-16 relative overflow-hidden">
