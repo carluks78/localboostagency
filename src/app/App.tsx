@@ -3,7 +3,6 @@ import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { Textarea } from './components/ui/textarea';
 import { Card, CardContent } from './components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './components/ui/select';
 import { Menu, X, Phone, Mail, MapPin, Star, TrendingUp, Users, Target, CheckCircle, MessageCircle, AlertTriangle, Search, Eye, FileText, Zap, Wrench, UtensilsCrossed, Car, ShoppingBag, Award } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -828,29 +827,17 @@ Message: ${formData.message}`;
         }}
       >
 
-        {/* 🔥 DROPDOWN EN PREMIER */}
-        <Select
-          value={formData.typeEntreprise || ""}
-          onValueChange={(value) =>
-            setFormData((prev) => ({
-              ...prev,
-              typeEntreprise: value,
-            }))
-          }
-        >
-          <SelectTrigger className="h-12">
-            <SelectValue placeholder="Type d'entreprise" />
-          </SelectTrigger>
-
-          <SelectContent position="popper">
-            <SelectItem value="artisan">Artisan</SelectItem>
-            <SelectItem value="restaurant">Restaurant</SelectItem>
-            <SelectItem value="garage">Garage</SelectItem>
-            <SelectItem value="taxi">Taxi / VTC</SelectItem>
-            <SelectItem value="commerce">Commerce local</SelectItem>
-            <SelectItem value="autre">Autre</SelectItem>
-          </SelectContent>
-        </Select>
+        <Input
+  name="typeEntreprise"
+  value={formData.typeEntreprise}
+  onChange={handleChange}
+  placeholder="Ex: Taxi, Restaurant, Artisan, Garage..."
+  required
+  className="h-12"
+/>
+<p className="text-xs text-gray-500 -mt-3">
+  Exemple : Taxi, plombier, restaurant, commerce…
+</p>
 
         {/* NOM */}
         <Input
