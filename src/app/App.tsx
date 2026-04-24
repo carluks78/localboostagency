@@ -171,10 +171,11 @@ export default function App() {
 
     const messageText = `Demande d'audit gratuit - LocalBoost Agency
 
+Type: ${formData.typeEntreprise}
 Nom: ${formData.nom}
 Téléphone: ${formData.telephone}
 Email: ${formData.email}
-Type d'entreprise: ${formData.typeEntreprise}
+Site: ${formData.site || 'Non renseigné'}
 Message: ${formData.message || 'Aucun message'}`;
 
     if (isMobile) {
