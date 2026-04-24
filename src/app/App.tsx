@@ -17,6 +17,7 @@ export default function App() {
     telephone: '',
     email: '',
     typeEntreprise: '',
+    site: "",
     message: ''
   });
 
@@ -808,6 +809,7 @@ Type: ${formData.typeEntreprise}
 Nom: ${formData.nom}
 Téléphone: ${formData.telephone}
 Email: ${formData.email}
+Site: ${formData.site || "Aucun"}  // 👈 AJOUT
 Message: ${formData.message}`;
 
           const isMobile =
@@ -880,6 +882,15 @@ Message: ${formData.message}`;
           type="email"
           className="h-12"
         />
+
+        <Input
+  name="site"
+  value={formData.site}
+  onChange={handleChange}
+  placeholder="https://monsite.fr"
+  type="url"
+  className="h-12"
+/>
 
         {/* MESSAGE */}
         <Textarea
