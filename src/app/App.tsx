@@ -791,121 +791,121 @@ Message: ${formData.message || 'Aucun message'}`;
         {/* FORM */}
         <div className="relative group">
 
-          {/* IMPORTANT: overlay NON bloquant */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none" />
+  {/* overlay NON bloquant */}
+  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none" />
 
-          <Card className="relative z-10 shadow-2xl border-2 border-gray-200 rounded-3xl">
-            <CardContent className="pt-8 pb-8">
+  <Card className="relative z-10 shadow-2xl border-2 border-gray-200 rounded-3xl">
+    <CardContent className="pt-8 pb-8">
 
-              <form
-                className="space-y-5"
-                onSubmit={(e) => {
-                  e.preventDefault();
+      <form
+        className="space-y-5"
+        onSubmit={(e) => {
+          e.preventDefault();
 
-                  const msg = `Demande audit LocalBoost
+          const msg = `Demande audit LocalBoost
 
+Type: ${formData.typeEntreprise}
 Nom: ${formData.nom}
 Téléphone: ${formData.telephone}
 Email: ${formData.email}
-Type: ${formData.typeEntreprise}
 Message: ${formData.message}`;
 
-                  const isMobile =
-                    /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          const isMobile =
+            /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-                  if (isMobile) {
-                    window.location.href =
-                      `sms:+33659841301?body=${encodeURIComponent(msg)}`;
-                  } else {
-                    window.open(
-                      `mailto:localboostagency.contact@gmail.com?subject=${encodeURIComponent(
-                        "Demande d'audit gratuit"
-                      )}&body=${encodeURIComponent(msg)}`
-                    );
-                  }
-                }}
-              >
+          if (isMobile) {
+            window.location.href =
+              `sms:+33659841301?body=${encodeURIComponent(msg)}`;
+          } else {
+            window.open(
+              `mailto:localboostagency.contact@gmail.com?subject=${encodeURIComponent(
+                "Demande d'audit gratuit"
+              )}&body=${encodeURIComponent(msg)}`
+            );
+          }
+        }}
+      >
 
-                {/* NOM */}
-                <Input
-                  name="nom"
-                  value={formData.nom}
-                  onChange={handleChange}
-                  placeholder="Votre nom"
-                  required
-                  className="h-12"
-                />
+        {/* 🔥 DROPDOWN EN PREMIER */}
+        <Select
+          value={formData.typeEntreprise || ""}
+          onValueChange={(value) =>
+            setFormData((prev) => ({
+              ...prev,
+              typeEntreprise: value,
+            }))
+          }
+        >
+          <SelectTrigger className="h-12">
+            <SelectValue placeholder="Type d'entreprise" />
+          </SelectTrigger>
 
-                {/* TELEPHONE */}
-                <Input
-                  name="telephone"
-                  value={formData.telephone}
-                  onChange={handleChange}
-                  placeholder="Téléphone"
-                  required
-                  type="tel"
-                  className="h-12"
-                />
+          <SelectContent position="popper">
+            <SelectItem value="artisan">Artisan</SelectItem>
+            <SelectItem value="restaurant">Restaurant</SelectItem>
+            <SelectItem value="garage">Garage</SelectItem>
+            <SelectItem value="taxi">Taxi / VTC</SelectItem>
+            <SelectItem value="commerce">Commerce local</SelectItem>
+            <SelectItem value="autre">Autre</SelectItem>
+          </SelectContent>
+        </Select>
 
-                {/* EMAIL */}
-                <Input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email"
-                  type="email"
-                  className="h-12"
-                />
+        {/* NOM */}
+        <Input
+          name="nom"
+          value={formData.nom}
+          onChange={handleChange}
+          placeholder="Votre nom"
+          required
+          className="h-12"
+        />
 
-                {/* DROPDOWN CLEAN */}
-<Select
-  value={formData.typeEntreprise ?? undefined}
-  onValueChange={(value) =>
-    setFormData((prev) => ({
-      ...prev,
-      typeEntreprise: value,
-    }))
-  }
->
-  <SelectTrigger className="h-12">
-    <SelectValue placeholder="Type d'entreprise" />
-  </SelectTrigger>
+        {/* TELEPHONE */}
+        <Input
+          name="telephone"
+          value={formData.telephone}
+          onChange={handleChange}
+          placeholder="Téléphone"
+          required
+          type="tel"
+          className="h-12"
+        />
 
-  <SelectContent position="popper">
-    <SelectItem value="artisan">Artisan</SelectItem>
-    <SelectItem value="restaurant">Restaurant</SelectItem>
-    <SelectItem value="garage">Garage</SelectItem>
-    <SelectItem value="taxi">Taxi / VTC</SelectItem>
-    <SelectItem value="commerce">Commerce local</SelectItem>
-    <SelectItem value="autre">Autre</SelectItem>
-  </SelectContent>
-</Select>
+        {/* EMAIL */}
+        <Input
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+          type="email"
+          className="h-12"
+        />
 
-                {/* MESSAGE */}
-                <Textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Message (optionnel)"
-                  rows={4}
-                />
+        {/* MESSAGE */}
+        <Textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Message (optionnel)"
+          rows={4}
+        />
 
-                {/* BUTTON */}
-                <Button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg py-7 font-semibold shadow-xl"
-                >
-                  Demander un audit gratuit
-                </Button>
+        {/* BUTTON */}
+        <Button
+          type="submit"
+          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg py-7 font-semibold shadow-xl"
+        >
+          Demander un audit gratuit
+        </Button>
 
-                <p className="text-xs text-gray-500 text-center">
-                  Réponse sous 24h · Sans engagement
-                </p>
+        <p className="text-xs text-gray-500 text-center">
+          Réponse sous 24h · Sans engagement
+        </p>
 
-              </form>
-            </CardContent>
-          </Card>
-        </div>
+      </form>
+    </CardContent>
+  </Card>
+</div>
 
         {/* CONTACT DIRECT */}
         <div className="space-y-6">
