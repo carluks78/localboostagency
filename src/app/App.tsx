@@ -875,8 +875,8 @@ Message: ${formData.message || 'Aucun message'}`;
   name="site"
   value={formData.site}
   onChange={handleChange}
-  placeholder="https://monsite.fr"
-  type="url"
+  placeholder="https://monsite.fr (optionnel)"
+  type="text"
   className="h-12"
 />
 
