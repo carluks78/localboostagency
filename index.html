@@ -1,16 +1,66 @@
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>LocalBoost-Agency</title>
-      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
-    </head>
+ <!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <!-- 🔥 TITLE SEO -->
+    <title>LocalBoost Agency - Plus de clients grâce à Google</title>
+
+    <!-- 🔎 META SEO -->
+    <meta
+      name="description"
+      content="LocalBoost Agency aide les entreprises locales (artisans, restaurants, taxis, garages...) à obtenir plus de clients grâce à Google, SEO local et optimisation de leur visibilité."
+    />
+
+    <meta name="author" content="LocalBoost Agency" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- 🌍 OPEN GRAPH (réseaux sociaux) -->
+    <meta property="og:title" content="LocalBoost Agency" />
+    <meta
+      property="og:description"
+      content="Plus de clients grâce à Google et au référencement local."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- 📱 MOBILE / THEME -->
+    <meta name="theme-color" content="#2563eb" />
+
+    <!-- ⭐ FAVICON -->
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- ⚡ BASE STYLE (React root fix) -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: #ffffff;
+      }
+
+      #root {
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- 📊 (optionnel futur) Google Analytics -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    </script>
+    -->
+  </body>
+</html>
