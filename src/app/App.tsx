@@ -809,7 +809,7 @@ Type: ${formData.typeEntreprise}
 Nom: ${formData.nom}
 Téléphone: ${formData.telephone}
 Email: ${formData.email}
-Site: ${formData.site || "Aucun"}  // 👈 AJOUT
+Site: ${formData.site ||
 Message: ${formData.message}`;
 
           const isMobile =
