@@ -809,8 +809,8 @@ Type: ${formData.typeEntreprise}
 Nom: ${formData.nom}
 Téléphone: ${formData.telephone}
 Email: ${formData.email}
-Site: ${formData.site ||
-Message: ${formData.message}`;
+Site: ${formData.site || 'Non renseigné'}
+Message: ${formData.message || 'Aucun message'}`;
 
           const isMobile =
             /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
